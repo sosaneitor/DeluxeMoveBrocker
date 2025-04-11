@@ -1,0 +1,313 @@
+// Variables principales y utilitarias
+$primary-color: #0ea5e9;
+$background-dark: #111827;
+$card-bg: rgba(255, 255, 255, 0.05);
+$text-light: #e5e7eb;
+$border-radius: 1rem;
+$spacing: 1rem;
+$font-family: 'Inter', sans-serif;
+$transition-speed: 0.3s;
+
+// Contenedor principal
+.modern-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: $text-light;
+  font-family: $font-family;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+// Navbar/Header
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing $spacing * 2;
+  background: rgba(17, 24, 39, 0.85);
+  border-radius: $border-radius;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease-out;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+
+    li {
+      a {
+        color: $text-light;
+        font-weight: 500;
+        text-decoration: none;
+        position: relative;
+        transition: color $transition-speed ease;
+
+        &:hover {
+          color: lighten($primary-color, 20%);
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          background: $primary-color;
+          transition: width $transition-speed ease;
+          bottom: -2px;
+          left: 0;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Hero Header
+.hero-header {
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    animation: fadeInDown 1s ease-out;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: lighten($text-light, 10%);
+    animation: fadeInDown 1.2s ease-out;
+  }
+}
+
+// Hero Section
+.hero-section {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 3rem;
+  }
+}
+
+// Imagen en Hero Section
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  animation: fadeInLeft 1s ease-out;
+
+  .hero-image {
+    max-width: 100%;
+    border-radius: $border-radius;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform $transition-speed ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+// Formulario de Cotización
+.quote-form {
+  flex: 1;
+  background: $card-bg;
+  backdrop-filter: blur(10px);
+  border-radius: $border-radius;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInRight 1.2s ease-out;
+  max-width: 500px;
+  width: 100%;
+
+  .form-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: $text-light;
+      font-size: 1rem;
+      transition: background $transition-speed ease;
+
+      &:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color $transition-speed ease, transform $transition-speed ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+  }
+}
+.modern-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.875rem;
+    color: lighten($text-light, 30%);
+  
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+  
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+  
+      .footer-logo {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: $primary-color;
+      }
+  
+      .footer-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+  
+        li {
+          a {
+            color: $text-light;
+            text-decoration: none;
+            position: relative;
+            transition: color $transition-speed ease;
+  
+            &:hover {
+              color: lighten($primary-color, 10%);
+            }
+  
+            &::after {
+              content: "";
+              position: absolute;
+              width: 0;
+              height: 2px;
+              background: $primary-color;
+              transition: width $transition-speed ease;
+              bottom: -2px;
+              left: 0;
+            }
+  
+            &:hover::after {
+              width: 100%;
+            }
+          }
+        }
+      }
+  
+      .footer-social {
+        a {
+          font-size: 1.5rem;
+          color: $text-light;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          height: 2.5rem;
+          border: 1px solid $text-light;
+          border-radius: 50%;
+          transition: all $transition-speed ease;
+  
+          &:hover {
+            color: $primary-color;
+            border-color: $primary-color;
+            transform: translateY(-3px);
+          }
+        }
+      }
+    }
+  
+    .footer-bottom {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: lighten($text-light, 30%);
+    }
+  }
+  
+
+// Animaciones
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
