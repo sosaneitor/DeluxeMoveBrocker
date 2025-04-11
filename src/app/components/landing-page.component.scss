@@ -103,24 +103,30 @@ $transition-speed: 0.3s;
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     padding: 0 3rem;
+    gap: 2rem;
   }
 }
 
 // Imagen en Hero Section
 .hero-image-container {
-  flex: 1;
   display: flex;
   justify-content: center;
   animation: fadeInLeft 1s ease-out;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 
   .hero-image {
     max-width: 100%;
+    height: auto;
     border-radius: $border-radius;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: transform $transition-speed ease;
-    
+
     &:hover {
       transform: scale(1.02);
     }
@@ -129,15 +135,19 @@ $transition-speed: 0.3s;
 
 // Formulario de Cotización
 .quote-form {
-  flex: 1;
   background: $card-bg;
   backdrop-filter: blur(10px);
   border-radius: $border-radius;
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   animation: fadeInRight 1.2s ease-out;
-  max-width: 500px;
   width: 100%;
+  max-width: 500px;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    max-width: none;
+  }
 
   .form-title {
     font-size: 1.75rem;
@@ -189,94 +199,94 @@ $transition-speed: 0.3s;
     }
   }
 }
+
 .modern-footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.875rem;
-    color: lighten($text-light, 30%);
-  
-    .footer-top {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem;
+  color: lighten($text-light, 30%);
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    .footer-links {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-  
-      .footer-logo {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: $primary-color;
-      }
-  
-      .footer-links {
-        display: flex;
-        list-style: none;
-        gap: 1.5rem;
-  
-        li {
-          a {
-            color: $text-light;
-            text-decoration: none;
-            position: relative;
-            transition: color $transition-speed ease;
-  
-            &:hover {
-              color: lighten($primary-color, 10%);
-            }
-  
-            &::after {
-              content: "";
-              position: absolute;
-              width: 0;
-              height: 2px;
-              background: $primary-color;
-              transition: width $transition-speed ease;
-              bottom: -2px;
-              left: 0;
-            }
-  
-            &:hover::after {
-              width: 100%;
-            }
-          }
-        }
-      }
-  
-      .footer-social {
+      list-style: none;
+      gap: 1.5rem;
+
+      li {
         a {
-          font-size: 1.5rem;
           color: $text-light;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 2.5rem;
-          height: 2.5rem;
-          border: 1px solid $text-light;
-          border-radius: 50%;
-          transition: all $transition-speed ease;
-  
+          text-decoration: none;
+          position: relative;
+          transition: color $transition-speed ease;
+
           &:hover {
-            color: $primary-color;
-            border-color: $primary-color;
-            transform: translateY(-3px);
+            color: lighten($primary-color, 10%);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: $primary-color;
+            transition: width $transition-speed ease;
+            bottom: -2px;
+            left: 0;
+          }
+
+          &:hover::after {
+            width: 100%;
           }
         }
       }
     }
-  
-    .footer-bottom {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: lighten($text-light, 30%);
+
+    .footer-social {
+      a {
+        font-size: 1.5rem;
+        color: $text-light;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid $text-light;
+        border-radius: 50%;
+        transition: all $transition-speed ease;
+
+        &:hover {
+          color: $primary-color;
+          border-color: $primary-color;
+          transform: translateY(-3px);
+        }
+      }
     }
   }
-  
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: lighten($text-light, 30%);
+  }
+}
 
 // Animaciones
 @keyframes fadeInDown {
@@ -309,5 +319,22 @@ $transition-speed: 0.3s;
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+
+// Estilo para el mensaje de respuesta del formulario
+.form-response {
+  background: $card-bg;           // Utiliza el fondo semitransparente definido
+  padding: $spacing;              // Espaciado uniforme
+  border-radius: $border-radius;   // Mismos bordes redondeados que en otros contenedores
+  margin-top: $spacing;            // Separación respecto al formulario
+  text-align: center;             // Centra el texto
+  font-size: 1rem;                // Tamaño de fuente legible
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); // Sombra sutil para destacarlo
+  transition: background $transition-speed ease, transform $transition-speed ease;
+
+  &:hover {
+    transform: translateY(-2px);
   }
 }

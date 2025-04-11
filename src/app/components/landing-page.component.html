@@ -1,92 +1,93 @@
 <div class="modern-container">
-    <nav class="navbar">
-        <div class="logo">🚚 SegurAuto</div>
-        <ul class="nav-links">
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#cotizacion">Cotización</a></li>
-          <li><a href="#contacto">Contáctanos</a></li>
-        </ul>
-    </nav>
-    <header class="hero-header">
-        <!-- Capa opcional para imagen de fondo -->
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <h1 class="title">Transporte de Vehículos Confiable</h1>
-          <p class="subtitle">Cotiza fácilmente el transporte de tu vehículo</p>
-        </div>
-    </header>
-  
-    <!-- Hero Section -->
-    <section class="hero-section" id="cotizacion">
-      <!-- Imagen -->
-      <div class="hero-image-container">
-        <img
-          src="assets/fondo.jpg"
-          class="hero-image"
-          alt="Camión transportador de vehículos"
-        />
+  <nav class="navbar">
+    <div class="logo">🚚 SegurAuto</div>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#cotizacion">Cotización</a></li>
+      <li><a href="#contacto">Contáctanos</a></li>
+    </ul>
+  </nav>
+  <header class="hero-header">
+    <!-- Capa opcional para imagen de fondo -->
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="title">Transporte de Vehículos Confiable</h1>
+      <p class="subtitle">Cotiza fácilmente el transporte de tu vehículo</p>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="cotizacion">
+    <!-- Imagen -->
+    <div class="hero-image-container">
+      <img
+        src="assets/DeluxeMoveBroker.png"
+        class="hero-image"
+        alt="Camión transportador de vehículos"
+      />
+    </div>
+
+    <!-- Formulario con Angular -->
+    <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
+      <h2 class="form-title">Solicita tu cotización</h2>
+
+      <div class="form-group">
+        <label for="name">Nombre completo</label>
+        <input type="text" formControlName="name" required />
       </div>
-  
-      <!-- Formulario -->
-      <form
-        action="https://formspree.io/f/{tu_form_id}"
-        method="POST"
-        class="quote-form"
-      >
-        <h2 class="form-title">Solicita tu cotización</h2>
-  
-        <div class="form-group">
-          <label for="name">Nombre completo</label>
-          <input type="text" name="name" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" name="email" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="phone">Teléfono</label>
-          <input type="tel" name="phone" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="from">Origen</label>
-          <input type="text" name="from" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="to">Destino</label>
-          <input type="text" name="to" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="message">Comentarios adicionales</label>
-          <textarea name="message" rows="3"></textarea>
-        </div>
-  
-        <button type="submit" class="submit-btn">Enviar cotización</button>
-      </form>
-    </section>
-  
-    <!-- Footer -->
-    <footer class="modern-footer">
-        <div class="footer-top">
-          <div class="footer-logo">🚚 SegurAuto</div>
-          <ul class="footer-links">
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#cotizacion">Cotiza</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-          <div class="footer-social">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          © {{ currentYear }} Transporte SegurAuto. Todos los derechos reservados.
-        </div>
-    </footer>
-  </div>
-  
+
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" formControlName="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono</label>
+        <input type="tel" formControlName="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label for="from">Origen</label>
+        <input type="text" formControlName="from" required />
+      </div>
+
+      <div class="form-group">
+        <label for="to">Destino</label>
+        <input type="text" formControlName="to" required />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Comentarios adicionales</label>
+        <textarea formControlName="message" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Enviar cotización</button>
+      <!-- Mensaje de respuesta -->
+      <div *ngIf="message" class="form-response" [style.color]="messageColor">
+        {{ message }}
+      </div>
+    </form>
+
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="modern-footer">
+    <div class="footer-top">
+      <div class="footer-logo">🚚 SegurAuto</div>
+      <ul class="footer-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#cotizacion">Cotiza</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © {{ currentYear }} Transporte SegurAuto. Todos los derechos reservados.
+    </div>
+  </footer>
+</div>
