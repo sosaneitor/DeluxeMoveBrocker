@@ -1,0 +1,96 @@
+
+$primary-color: #0ea5e9;
+$background-dark: #111827;
+$card-bg: rgba(255, 255, 255, 0.05);
+$text-light: #e5e7eb;
+$border-radius: 1rem;
+$spacing: 1rem;
+$font-family: 'Inter', sans-serif;
+$transition-speed: 0.3s;
+
+.reviews-section {
+    padding: 2rem 0;
+    text-align: center;
+  
+    .hero-header {
+      margin-bottom: 2rem;
+  
+      .title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: $text-light; 
+        animation: fadeInDown 1s ease-out;
+      }
+  
+      .subtitle {
+        font-size: 1.25rem;
+        color: lighten($text-light, 10%);
+        animation: fadeInDown 1.2s ease-out;
+      }
+    }
+  
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      justify-items: center;
+  
+      @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+      }
+  
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+  
+      .review-card {
+        background: $card-bg;
+        border-radius: $border-radius;
+        padding: $spacing * 2;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transition: transform $transition-speed ease;
+        text-align: center;
+  
+        &:hover {
+          transform: translateY(-5px);
+        }
+  
+        .review-text {
+          color: lighten($text-light, 10%);
+          font-size: 1rem;
+          margin: 0 1rem 1rem 1rem;
+        }
+  
+        .review-author {
+          p {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: $primary-color;
+          }
+  
+          .review-stars {
+            margin-top: 0.25rem;
+  
+            i {
+              color: $primary-color;
+              margin: 0 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Animación si es que no está ya definida en global
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

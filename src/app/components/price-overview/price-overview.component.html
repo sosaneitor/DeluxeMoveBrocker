@@ -1,0 +1,30 @@
+<section class="price-section modern-container">
+    <div class="price-content">
+      <!-- Columna izquierda -->
+      <div class="price-left">
+        <!-- Ejemplo usando FontAwesome; ajusta el icono según lo que desees -->
+        <div class="icon">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <h2 class="price-title">{{ sectionTitle }}</h2>
+        <p class="price-intro">
+          {{ sectionIntro }}
+        </p>
+      </div>
+  
+      <!-- Columna derecha -->
+      <div class="price-right">
+        <div class="price-factor" *ngFor="let factor of factors">
+          <div class="factor-header">
+            <h3 class="factor-number">{{ factor.number }}</h3>
+            <h4 class="factor-title">{{ factor.title }}</h4>
+          </div>
+          <hr />
+          <p class="factor-description">
+            {{ factor.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  

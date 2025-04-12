@@ -1,0 +1,23 @@
+<div class="services-container">
+    <h2 class="services-title">Servicios</h2>
+  
+    <div class="cards-container">
+      <!-- Iteración para cada servicio -->
+      <div 
+        class="service-card"
+        *ngFor="let service of services"
+        [ngStyle]="{'background-image': 'url(' + service.backgroundImage + ')'}"
+      >
+        <!-- Capa de contenido sobre el fondo -->
+        <div class="service-card-overlay">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <button class="btn-primary">
+      Reservar ahora
+    </button>
+  </div>
+  

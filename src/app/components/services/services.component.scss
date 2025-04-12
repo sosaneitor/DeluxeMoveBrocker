@@ -1,0 +1,115 @@
+// Variables principales y utilitarias
+$primary-color: #0ea5e9;
+$background-dark: #111827;
+$card-bg: rgba(255, 255, 255, 0.05);
+$text-light: #e5e7eb;
+$border-radius: 1rem;
+$spacing: 1rem;
+$font-family: 'Inter', sans-serif;
+$transition-speed: 0.3s;
+
+.services-container {
+  text-align: center;
+  margin: 2rem auto;
+  font-family: $font-family;
+
+  .services-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: $text-light;
+    animation: fadeInDown 0.8s ease-out;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .service-card {
+      background-color: $card-bg; // Color de respaldo en caso de no cargar la imagen
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: $border-radius;
+      padding: $spacing;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      flex: 1;
+      min-width: 250px;
+      transition: transform $transition-speed ease;
+      position: relative; // Necesario para el overlay
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      // Capa de contenido para que el texto se destaque
+      .service-card-overlay {
+        position: relative;
+        z-index: 2;
+        padding: 1rem;
+        
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          color: $primary-color;
+        }
+
+        p {
+          color: lighten($text-light, 10%);
+          font-size: 1rem;
+          line-height: 1.4;
+        }
+      }
+
+      // Overlay semitransparente para oscurecer la imagen de fondo y mejorar la legibilidad
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.4); // Ajusta la opacidad y el color según tu diseño
+        border-radius: inherit;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color $transition-speed ease, transform $transition-speed ease;
+    margin-top: 2rem;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Animación para el título
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

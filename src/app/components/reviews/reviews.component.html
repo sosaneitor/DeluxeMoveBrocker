@@ -1,0 +1,22 @@
+<section class="reviews-section modern-container">
+    <div class="hero-header">
+      <h2 class="title">Las reseñas hablan por nosotros</h2>
+      <p class="subtitle">Lo que nuestros clientes opinan de </p>
+    </div>
+  
+    <div class="reviews-grid">
+      <div class="review-card" *ngFor="let review of reviews">
+        <!-- Texto de la reseña -->
+        <p class="review-text">“{{ review.text }}”</p>
+  
+        <!-- Nombre y rating -->
+        <div class="review-author">
+          <p>{{ review.author }}</p>
+          <div class="review-stars">
+            <i class="fa-solid fa-star" *ngFor="let star of [].constructor(review.rating)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

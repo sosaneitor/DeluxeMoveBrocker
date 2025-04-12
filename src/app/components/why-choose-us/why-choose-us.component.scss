@@ -1,0 +1,85 @@
+// Variables principales y utilitarias (asegúrate de que las variables estén disponibles globalmente o definiéndolas aquí)
+$primary-color: #0ea5e9;
+$background-dark: #111827;
+$card-bg: rgba(255, 255, 255, 0.05);
+$text-light: #e5e7eb;
+$border-radius: 1rem;
+$spacing: 1rem;
+$font-family: 'Inter', sans-serif;
+$transition-speed: 0.3s;
+
+.why-choose-us {
+  // Se aprovecha la clase modern-container
+  padding: 2rem 0;
+  text-align: center;
+  font-family: $font-family;
+
+  .hero-header {
+    margin-bottom: 2rem;
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 1s ease-out;
+      color: $text-light;
+    }
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing * 2;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .feature-card {
+      background-color: $card-bg;
+      border-radius: $border-radius;
+      padding: $spacing;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: transform $transition-speed ease;
+      text-align: center;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .icon {
+        font-size: 2.5rem;
+        color: $primary-color;
+        margin-bottom: $spacing;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: $primary-color;
+      }
+
+      p {
+        font-size: 1rem;
+        color: lighten($text-light, 10%);
+      }
+    }
+  }
+}
+
+// Animación para fadeInDown, ya definida en otros estilos si es que se requiere:
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

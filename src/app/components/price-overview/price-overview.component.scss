@@ -1,0 +1,99 @@
+// Si tus variables no están importadas globalmente, asegúrate de incluirlas o definirlas:
+$primary-color: #0ea5e9;
+$background-dark: #111827;
+$card-bg: rgba(255, 255, 255, 0.05);
+$text-light: #e5e7eb;
+$border-radius: 1rem;
+$spacing: 1rem;
+$font-family: 'Inter', sans-serif;
+$transition-speed: 0.3s;
+
+.price-section {
+  padding: 2rem 0; // Espacio superior e inferior
+  
+  .price-content {
+    display: grid;
+    grid-template-columns: 1fr;  // Por defecto, una sola columna (móvil)
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      // Dos columnas en pantallas medianas o superiores
+      grid-template-columns: 40% 60%;
+    }
+
+    .price-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      color: $text-light;
+
+      .icon {
+        font-size: 3rem;   // Ajusta según prefieras
+        color: $primary-color;
+        margin-bottom: $spacing;
+      }
+
+      .price-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: $spacing;
+      }
+
+      .price-intro {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: lighten($text-light, 10%);
+      }
+    }
+
+    .price-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem; // Espacio entre cada factor
+
+      .price-factor {
+        color: $text-light;
+        background: $card-bg;
+        border-radius: $border-radius;
+        padding: $spacing * 2;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transition: transform $transition-speed ease;
+
+        &:hover {
+          transform: translateY(-4px);
+        }
+
+        .factor-header {
+          display: flex;
+          align-items: baseline; // Alinea el número y el título
+
+          .factor-number {
+            color: $primary-color;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 1rem;
+          }
+
+          .factor-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: $text-light;
+          }
+        }
+
+        hr {
+          border: none;
+          border-bottom: 1px solid lighten($text-light, 30%);
+          margin: 0.5rem 0 1rem 0;
+        }
+
+        .factor-description {
+          font-size: 0.95rem;
+          color: lighten($text-light, 10%);
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}

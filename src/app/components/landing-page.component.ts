@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactService } from './contact.service';
+import { ServicesComponent } from './services/services.component';
+import { WhyChooseUsComponent } from './why-choose-us/why-choose-us.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { PriceOverviewComponent } from './price-overview/price-overview.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, ReviewsComponent, PriceOverviewComponent ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
 })
