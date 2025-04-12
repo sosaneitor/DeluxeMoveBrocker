@@ -1,14 +1,28 @@
 <div class="modern-container">
+  <!-- Barra de navegación -->
   <nav class="navbar">
-    <div class="logo">🚚 SegurAuto</div>
+    <div class="logo">
+      <img src="assets/LogoDeluxeMove5.png" alt="Logo SegurAuto" />
+    </div>
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#cotizacion">Cotización</a></li>
       <li><a href="#contacto">Contáctanos</a></li>
     </ul>
+    <button class="menu-toggle" (click)="toggleMenu()">
+      <span class="material-icons">☰</span>
+    </button>
   </nav>
-  <header class="hero-header">
-    <!-- Capa opcional para imagen de fondo -->
+
+  <!-- Menú móvil responsive -->
+  <ul class="nav-mobile" [class.active]="menuOpen">
+    <li><a href="#servicios" (click)="closeMenu()">Servicios</a></li>
+    <li><a href="#cotizacion" (click)="closeMenu()">Cotización</a></li>
+    <li><a href="#contacto" (click)="closeMenu()">Contáctanos</a></li>
+  </ul>
+
+  <!-- Sección Hero Header -->
+  <header class="hero-header" id="inicio">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="title">Transporte de Vehículos Confiable</h1>
@@ -16,76 +30,69 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section" id="cotizacion">
-    <!-- Imagen -->
-    <div class="hero-image-container">
-      <img
-        src="assets/DeluxeMoveBroker.png"
-        class="hero-image"
-        alt="Camión transportador de vehículos"
-      />
-    </div>
-
-    <!-- Formulario con Angular -->
-    <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
-      <h2 class="form-title">Solicita tu cotización</h2>
-
-      <div class="form-group">
-        <label for="name">Nombre completo</label>
-        <input type="text" formControlName="name" required />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" formControlName="email" required />
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Teléfono</label>
-        <input type="tel" formControlName="phone" required />
-      </div>
-
-      <div class="form-group">
-        <label for="from">Origen</label>
-        <input type="text" formControlName="from" required />
-      </div>
-
-      <div class="form-group">
-        <label for="to">Destino</label>
-        <input type="text" formControlName="to" required />
-      </div>
-
-      <div class="form-group">
-        <label for="message">Comentarios adicionales</label>
-        <textarea formControlName="message" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn">Enviar cotización</button>
-      <!-- Mensaje de respuesta -->
-      <div *ngIf="message" class="form-response" [style.color]="messageColor">
-        {{ message }}
-      </div>
-    </form>
-
-
-  </section>
-
-  <section class="hero-section servicios" id="servicios">
-
-    <app-services></app-services>
-
-  </section>
-
-
-  <app-why-choose-us></app-why-choose-us>
-
-
-  <app-reviews></app-reviews>
-
-  <app-price-overview></app-price-overview>
-
+  <div class="modern-container">
+    <!-- Sección principal con texto y botón a la izquierda, imagen a la derecha -->
+    <section class="hero-section">
+      <!-- Contenido de texto y botones -->
+      <div class="hero-content">
+        <h1 class="hero-title">SAFE AUTO TRANSPORT INC</h1>
+        <p class="hero-subtitle">
+          We have been in the business of moving premium cars for more than 10 years
+          using the highest American standards
+        </p>
   
+        <div class="hero-buttons">
+          <!-- Botón en rojo -->
+          <button class="btn-primary">
+            Request a quote
+          </button>
+
+          <button
+            class="submit-btn whatsapp"
+            (click)="openWhatsApp()"
+            style="background-color: #25D366;"
+          >
+            WhatsApp
+          </button>
+  
+          <!-- Botón en color oscuro/gris -->
+          <button class="hero-btn hero-btn-secondary">
+            Learn more
+          </button>
+        </div>
+      </div>
+  
+      <!-- Imagen a la derecha -->
+      <div class="hero-image-container">
+        <img
+          src="assets/DeluxeMoveBroker.png"
+          class="hero-image"
+          alt="Camión transportador de vehículos"
+        />
+      </div>
+    </section>
+  </div>
+
+  <!-- Sección de Servicios -->
+  <section class="hero-section servicios full-section" id="servicios">
+    <app-services></app-services>
+  </section>
+
+  <!-- Sección "Por qué elegirnos" -->
+  <section class="full-section" id="porque-elegir">
+    <app-why-choose-us></app-why-choose-us>
+  </section>
+
+  <!-- Sección de Precios -->
+  <section class="full-section" id="precios">
+    <app-price-overview></app-price-overview>
+  </section>
+
+  <!-- Sección del Formulario de Cotización -->
+  <section id="cotizacion">
+    <app-quote-form></app-quote-form>
+  </section>
+
   <!-- Footer -->
   <footer class="modern-footer">
     <div class="footer-top">

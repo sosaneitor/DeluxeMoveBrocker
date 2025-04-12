@@ -1,0 +1,41 @@
+
+    <!-- Formulario con Angular -->
+    <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
+        <h2 class="form-title">Solicita tu cotización</h2>
+  
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input type="text" formControlName="name" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" formControlName="email" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="phone">Teléfono</label>
+          <input type="tel" formControlName="phone" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="from">Origen</label>
+          <input type="text" formControlName="from" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="to">Destino</label>
+          <input type="text" formControlName="to" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="message">Comentarios adicionales</label>
+          <textarea formControlName="message" rows="3"></textarea>
+        </div>
+  
+        <button type="submit" class="submit-btn">Enviar cotización</button>
+        <!-- Mensaje de respuesta -->
+        <div *ngIf="message" class="form-response" [style.color]="messageColor">
+          {{ message }}
+        </div>
+    </form>

@@ -1,9 +1,9 @@
 <div class="services-container">
     <h2 class="services-title">Servicios</h2>
-  
+
     <div class="cards-container">
       <!-- Iteración para cada servicio -->
-      <div 
+      <div
         class="service-card"
         *ngFor="let service of services"
         [ngStyle]="{'background-image': 'url(' + service.backgroundImage + ')'}"
@@ -15,9 +15,8 @@
         </div>
       </div>
     </div>
-  
+
     <button class="btn-primary">
       Reservar ahora
     </button>
-  </div>
-  
+</div>

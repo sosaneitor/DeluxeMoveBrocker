@@ -7,11 +7,12 @@ import { ServicesComponent } from './services/services.component';
 import { WhyChooseUsComponent } from './why-choose-us/why-choose-us.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PriceOverviewComponent } from './price-overview/price-overview.component';
+import { QuoteFormComponent } from './quote-form/quote-form.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, ReviewsComponent, PriceOverviewComponent ],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, ReviewsComponent, PriceOverviewComponent, QuoteFormComponent ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
 })
@@ -20,6 +21,7 @@ export class LandingPageComponent implements OnInit {
   quoteForm!: FormGroup;
   message: string = '';
   messageColor: string = '';
+  menuOpen = false;
 
   constructor(private fb: FormBuilder, private contactService: ContactService) {}
 
@@ -50,5 +52,26 @@ export class LandingPageComponent implements OnInit {
           this.messageColor = 'red';
         }
       });
+  }
+
+  // Abre WhatsApp con el número configurado (reemplaza el número según necesites)
+  openWhatsApp(): void {
+    window.open('https://wa.me/1234567890', '_blank');
+  }
+
+  // Desplaza la vista a la sección indicada por su ID
+  scrollTo(section: string): void {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
   }
 }
