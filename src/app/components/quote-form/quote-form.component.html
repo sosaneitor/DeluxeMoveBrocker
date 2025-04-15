@@ -1,41 +1,105 @@
+<form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
+  <h2 class="form-title">Solicita tu cotización</h2>
 
-    <!-- Formulario con Angular -->
-    <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
-        <h2 class="form-title">Solicita tu cotización</h2>
+  <div class="form-group">
+    <label for="name">Nombre completo</label>
+    <input type="text" id="name" formControlName="name" required autocomplete="off" />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" formControlName="email" required autocomplete="off" />
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Teléfono</label>
+    <input type="tel" id="phone" formControlName="phone" required autocomplete="off" />
+  </div>
+
+  <!-- Input para "from" con autocompletado -->
+  <div class="form-group autocomplete">
+    <label for="from">Origen</label>
+    <div class="autocomplete-wrapper">
+      <input type="text"
+             id="from"
+             formControlName="from"
+             placeholder="Escribe el lugar de origen"
+             required
+             autocomplete="off"
+             (focus)="showFromSuggestions = fromSuggestions.length > 0"
+             (blur)="hideFromSuggestions()" />
+      <button type="button" class="clear-btn" *ngIf="quoteForm.get('from')?.value" (click)="clearFromField()">×</button>
+    </div>
+    <!-- Lista de sugerencias para "from" -->
+    <ul *ngIf="fromSuggestions.length > 0 && showFromSuggestions" class="suggestions-list">
+      <li *ngFor="let suggestion of fromSuggestions"
+          (mousedown)="selectFromSuggestion(suggestion)">
+        {{ suggestion.display_name }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Input para "to" con autocompletado -->
+  <div class="form-group autocomplete">
+    <label for="to">Destino</label>
+    <div class="autocomplete-wrapper">
+      <input type="text"
+             id="to"
+             formControlName="to"
+             placeholder="Escribe el lugar de destino"
+             required
+             autocomplete="off"
+             (focus)="showToSuggestions = toSuggestions.length > 0"
+             (blur)="hideToSuggestions()" />
+      <button type="button" class="clear-btn" *ngIf="quoteForm.get('to')?.value" (click)="clearToField()">×</button>
+    </div>
+    <!-- Lista de sugerencias para "to" -->
+    <ul *ngIf="toSuggestions.length > 0 && showToSuggestions" class="suggestions-list">
+      <li *ngFor="let suggestion of toSuggestions"
+          (mousedown)="selectToSuggestion(suggestion)">
+        {{ suggestion.display_name }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="form-group">
+    <label for="is_enclosed">
+      <input type="checkbox" id="is_enclosed" formControlName="is_enclosed" />
+      ¿Requiere transporte cerrado?
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Fecha estimada</label>
+    <input type="date" id="date" formControlName="date" required autocomplete="off" />
+  </div>
+
+  <div class="form-group">
+    <label for="preferred_contact">¿Cómo prefieres recibir la cotización?</label>
+    <div class="custom-multi-select" (click)="toggleContactDropdown()">
+      <div class="selected-options">
+        {{ getSelectedContacts() || 'Selecciona una o más opciones' }}
+      </div>
+      <ul *ngIf="showContactDropdown" class="options-list">
+        <li *ngFor="let option of contactOptions">
+          <label>
+            <input type="checkbox" [value]="option.value" (change)="toggleContactOption(option.value)" [checked]="isContactSelected(option.value)" />
+            {{ option.label }}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Comentarios adicionales</label>
+    <textarea id="description" formControlName="description" rows="3"></textarea>
+  </div>
+
+  <button type="submit" class="submit-btn">Enviar cotización</button>
   
-        <div class="form-group">
-          <label for="name">Nombre completo</label>
-          <input type="text" formControlName="name" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" formControlName="email" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="phone">Teléfono</label>
-          <input type="tel" formControlName="phone" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="from">Origen</label>
-          <input type="text" formControlName="from" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="to">Destino</label>
-          <input type="text" formControlName="to" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="message">Comentarios adicionales</label>
-          <textarea formControlName="message" rows="3"></textarea>
-        </div>
-  
-        <button type="submit" class="submit-btn">Enviar cotización</button>
-        <!-- Mensaje de respuesta -->
-        <div *ngIf="message" class="form-response" [style.color]="messageColor">
-          {{ message }}
-        </div>
-    </form>
+  <!-- Mensaje de respuesta -->
+  <div *ngIf="message" class="form-response" [style.color]="messageColor">
+    {{ message }}
+  </div>
+</form>

@@ -2,12 +2,12 @@
   <!-- Barra de navegación -->
   <nav class="navbar">
     <div class="logo">
-      <img src="assets/LogoDeluxeMove5.png" alt="Logo SegurAuto" />
+      <img src="assets/LogoDeluxeMove5.png" alt="Logo Deluxe Move Broker LLC" />
     </div>
     <ul class="nav-links">
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#cotizacion">Cotización</a></li>
-      <li><a href="#contacto">Contáctanos</a></li>
+      <li><a href="#servicios">Nuestros Servicios</a></li>
+      <li><a href="#cotizacion">Solicita tu Cotización</a></li>
+      <li><a href="#contacto">Escríbenos</a></li>
     </ul>
     <button class="menu-toggle" (click)="toggleMenu()">
       <span class="material-icons">☰</span>
@@ -16,17 +16,27 @@
 
   <!-- Menú móvil responsive -->
   <ul class="nav-mobile" [class.active]="menuOpen">
-    <li><a href="#servicios" (click)="closeMenu()">Servicios</a></li>
-    <li><a href="#cotizacion" (click)="closeMenu()">Cotización</a></li>
-    <li><a href="#contacto" (click)="closeMenu()">Contáctanos</a></li>
+    <li><a href="#servicios" (click)="closeMenu()">Nuestros Servicios</a></li>
+    <li><a href="#cotizacion" (click)="closeMenu()">Solicita tu Cotización</a></li>
+    <li><a href="+1(786)266-7459" (click)="closeMenu()">Escríbenos</a></li>
   </ul>
 
   <!-- Sección Hero Header -->
   <header class="hero-header" id="inicio">
+    <div class="carousel">
+      <div class="carousel-slide" *ngFor="let image of carouselImages; let i = index" [class.active]="i === activeSlide">
+        <img [src]="image" alt="Fondo destacado {{ i + 1 }}" />
+      </div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="title">Transporte de Vehículos Confiable</h1>
-      <p class="subtitle">Cotiza fácilmente el transporte de tu vehículo</p>
+      <h1 class="title">Transporte Vehicular Seguro y Profesional</h1>
+      <p class="subtitle">Cotiza en minutos el traslado de tu vehículo</p>
+      <div class="hero-buttons">
+        <button class="hero-btn hero-btn-secondary" (click)="openCall()">
+          Contactanos
+        </button>
+    </div>
     </div>
   </header>
 
@@ -35,16 +45,15 @@
     <section class="hero-section">
       <!-- Contenido de texto y botones -->
       <div class="hero-content">
-        <h1 class="hero-title">SAFE AUTO TRANSPORT INC</h1>
+        <h1 class="hero-title">Deluxe Move Broker LLC</h1>
         <p class="hero-subtitle">
-          We have been in the business of moving premium cars for more than 10 years
-          using the highest American standards
+          Más de 10 años de experiencia trasladando vehículos de lujo con los más altos estándares de calidad en EE.UU.
         </p>
-  
+
         <div class="hero-buttons">
           <!-- Botón en rojo -->
-          <button class="btn-primary">
-            Request a quote
+          <button class="btn-primary" (click)="scrollTo('cotizacion')">
+            Solicitar cotización
           </button>
 
           <button
@@ -54,20 +63,20 @@
           >
             WhatsApp
           </button>
-  
+
           <!-- Botón en color oscuro/gris -->
-          <button class="hero-btn hero-btn-secondary">
-            Learn more
+          <button class="hero-btn hero-btn-secondary" (click)="scrollTo('servicios')">
+            Conócenos más
           </button>
         </div>
       </div>
-  
+
       <!-- Imagen a la derecha -->
       <div class="hero-image-container">
         <img
           src="assets/DeluxeMoveBroker.png"
           class="hero-image"
-          alt="Camión transportador de vehículos"
+          alt="Camión especializado en transporte de autos"
         />
       </div>
     </section>
@@ -96,20 +105,18 @@
   <!-- Footer -->
   <footer class="modern-footer">
     <div class="footer-top">
-      <div class="footer-logo">🚚 SegurAuto</div>
+      <div class="footer-logo"> Deluxe Move Broker LLC</div>
       <ul class="footer-links">
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#cotizacion">Cotiza</a></li>
+        <li><a href="#cotizacion">Cotización</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <div class="footer-social">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a (click)="openWhatsApp()" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
     <div class="footer-bottom">
-      © {{ currentYear }} Transporte SegurAuto. Todos los derechos reservados.
+      © {{ currentYear }} Deluxe Move Broker LLC. Todos los derechos reservados.
     </div>
   </footer>
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactService } from './contact.service';
@@ -12,18 +12,30 @@ import { QuoteFormComponent } from './quote-form/quote-form.component';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, ReviewsComponent, PriceOverviewComponent, QuoteFormComponent ],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, PriceOverviewComponent, QuoteFormComponent ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
   currentYear = new Date().getFullYear();
   quoteForm!: FormGroup;
   message: string = '';
   messageColor: string = '';
   menuOpen = false;
+  carouselImages = [
+    'assets/carousel/background1.PNG',
+    'assets/carousel/background2.PNG',
+    'assets/carousel/background3.PNG',
+    'assets/carousel/background5.PNG',
+  ]; 
+  activeSlide = 0;
+  private carouselInterval!: any;
 
-  constructor(private fb: FormBuilder, private contactService: ContactService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private contactService: ContactService, 
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     this.quoteForm = this.fb.group({
@@ -34,6 +46,21 @@ export class LandingPageComponent implements OnInit {
       to: ['', Validators.required],
       message: ['']
     });
+    if (isPlatformBrowser(this.platformId)) {
+      this.startCarousel();
+    }
+  }
+
+  startCarousel(): void {
+    this.carouselInterval = setInterval(() => {
+      this.activeSlide = (this.activeSlide + 1) % this.carouselImages.length;
+    }, 5000); // Cambia cada 5 segundos
+  }
+
+  ngOnDestroy(): void {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
   }
 
   onSubmit(): void {
@@ -56,7 +83,11 @@ export class LandingPageComponent implements OnInit {
 
   // Abre WhatsApp con el número configurado (reemplaza el número según necesites)
   openWhatsApp(): void {
-    window.open('https://wa.me/1234567890', '_blank');
+    window.open('https://wa.me/17862667459', '_blank');
+  }
+
+  openCall(): void {
+    window.open('tel:+17862667459', '_self');
   }
 
   // Desplaza la vista a la sección indicada por su ID
