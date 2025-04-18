@@ -1,103 +1,146 @@
-<div class="modern-container">
+<!-- landing-page.component.html -->
+<main class="modern-container">
   <!-- Barra de navegación -->
   <nav class="navbar">
     <div class="logo">
-      <img src="assets/LogoDeluxeMove5.png" alt="Logo Deluxe Move Broker LLC" />
+      <img
+        src="assets/LogoDeluxeMove5.png"
+        alt="{{ 'LANGING_PAGE.ALT_LOGO' | translate }}"
+      />
     </div>
+
     <ul class="nav-links">
-      <li><a href="#servicios">Nuestros Servicios</a></li>
-      <li><a href="#cotizacion">Solicita tu Cotización</a></li>
-      <li><a href="#contacto">Escríbenos</a></li>
+      <li><a href="#servicios">{{ 'LANGING_PAGE.NAV_SERVICES' | translate }}</a></li>
+      <li><a href="#cotizacion">{{ 'LANGING_PAGE.NAV_QUOTE' | translate }}</a></li>
+      <li><a (click)="openCall()">{{ 'LANGING_PAGE.NAV_CONTACT' | translate }}</a></li>
     </ul>
-    <button class="menu-toggle" (click)="toggleMenu()">
-      <span class="material-icons">☰</span>
-    </button>
+
+    <div class="nav-actions">
+      <!-- Language switcher dentro del nav -->
+      <div class="language-switcher">
+        <button
+          class="lang-btn"
+          (click)="changeLang('es')"
+          [class.active]="translate.currentLang === 'es'"
+          aria-label="Español"
+        >
+          <img src="assets/translateIcons/espana.png" alt="Español" width="20" height="14" />
+        </button>
+
+        <!-- Inglés -->
+        <button
+          class="lang-btn"
+          (click)="changeLang('en')"
+          [class.active]="translate.currentLang === 'en'"
+          aria-label="English"
+        >
+          <img src="assets/translateIcons/estados-unidos.png" alt="English" width="20" height="14" />
+        </button>
+      </div>
+
+      <!-- Toggle menú móvil -->
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <span class="material-icons">☰</span>
+      </button>
+    </div>
   </nav>
 
   <!-- Menú móvil responsive -->
   <ul class="nav-mobile" [class.active]="menuOpen">
-    <li><a href="#servicios" (click)="closeMenu()">Nuestros Servicios</a></li>
-    <li><a href="#cotizacion" (click)="closeMenu()">Solicita tu Cotización</a></li>
-    <li><a href="+1(786)266-7459" (click)="closeMenu()">Escríbenos</a></li>
+    <li><a href="#servicios" (click)="closeMenu()">{{ 'LANGING_PAGE.NAV_SERVICES' | translate }}</a></li>
+    <li><a href="#cotizacion" (click)="closeMenu()">{{ 'LANGING_PAGE.NAV_QUOTE' | translate }}</a></li>
+    <li><a (click)="openCall()" (click)="closeMenu()">{{ 'LANGING_PAGE.NAV_CONTACT' | translate }}</a></li>
   </ul>
 
   <!-- Sección Hero Header -->
   <header class="hero-header" id="inicio">
     <div class="carousel">
-      <div class="carousel-slide" *ngFor="let image of carouselImages; let i = index" [class.active]="i === activeSlide">
-        <img [src]="image" alt="Fondo destacado {{ i + 1 }}" />
+      <div
+        class="carousel-slide"
+        *ngFor="let image of carouselImages; let i = index"
+        [class.active]="i === activeSlide"
+      >
+        <img
+          [src]="image"
+          alt="Fondo destacado {{ i + 1 }}"
+        />
       </div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="title">Transporte Vehicular Seguro y Profesional</h1>
-      <p class="subtitle">Cotiza en minutos el traslado de tu vehículo</p>
+      <h1 class="title">
+        {{ 'LANGING_PAGE.TRANSPORT_SAFE' | translate }}
+      </h1>
+      <p class="subtitle">
+        {{ 'LANGING_PAGE.SUBTITLE' | translate }}
+      </p>
       <div class="hero-buttons">
-        <button class="hero-btn hero-btn-secondary" (click)="openCall()">
-          Contactanos
+        <button
+          class="hero-btn hero-btn-secondary"
+          (click)="openCall()"
+        >
+          {{ 'LANGING_PAGE.BUTTON_CONTACT' | translate }}
         </button>
-    </div>
+      </div>
     </div>
   </header>
 
-  <div class="modern-container">
-    <!-- Sección principal con texto y botón a la izquierda, imagen a la derecha -->
-    <section class="hero-section">
-      <!-- Contenido de texto y botones -->
-      <div class="hero-content">
-        <h1 class="hero-title">Deluxe Move Broker LLC</h1>
-        <p class="hero-subtitle">
-          Más de 10 años de experiencia trasladando vehículos de lujo con los más altos estándares de calidad en EE.UU.
-        </p>
+  <!-- Contenido principal -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        {{ 'LANGING_PAGE.MAIN_TITLE' | translate }}
+      </h1>
+      <p class="hero-subtitle">
+        {{ 'LANGING_PAGE.MAIN_SUBTITLE' | translate }}
+      </p>
 
-        <div class="hero-buttons">
-          <!-- Botón en rojo -->
-          <button class="btn-primary" (click)="scrollTo('cotizacion')">
-            Solicitar cotización
-          </button>
+      <div class="hero-buttons">
+        <button
+          class="btn-primary"
+          (click)="scrollTo('cotizacion')"
+        >
+          {{ 'LANGING_PAGE.BUTTON_REQUEST_QUOTE' | translate }}
+        </button>
 
-          <button
-            class="submit-btn whatsapp"
-            (click)="openWhatsApp()"
-            style="background-color: #25D366;"
-          >
-            WhatsApp
-          </button>
+        <button
+          class="submit-btn whatsapp"
+          (click)="openWhatsApp()"
+        >
+          {{ 'LANGING_PAGE.BUTTON_WHATSAPP' | translate }}
+        </button>
 
-          <!-- Botón en color oscuro/gris -->
-          <button class="hero-btn hero-btn-secondary" (click)="scrollTo('servicios')">
-            Conócenos más
-          </button>
-        </div>
+        <button
+          class="hero-btn hero-btn-secondary"
+          (click)="scrollTo('servicios')"
+        >
+          {{ 'LANGING_PAGE.BUTTON_LEARN_MORE' | translate }}
+        </button>
       </div>
+    </div>
 
-      <!-- Imagen a la derecha -->
-      <div class="hero-image-container">
-        <img
-          src="assets/DeluxeMoveBroker.png"
-          class="hero-image"
-          alt="Camión especializado en transporte de autos"
-        />
-      </div>
-    </section>
-  </div>
+    <div class="hero-image-container">
+      <img
+        src="assets/DeluxeMoveBroker.png"
+        class="hero-image"
+        alt="{{ 'LANGING_PAGE.ALT_HERO_IMAGE' | translate }}"
+      />
+    </div>
+  </section>
 
-  <!-- Sección de Servicios -->
+  <!-- Secciones adicionales -->
   <section class="hero-section servicios full-section" id="servicios">
     <app-services></app-services>
   </section>
 
-  <!-- Sección "Por qué elegirnos" -->
   <section class="full-section" id="porque-elegir">
     <app-why-choose-us></app-why-choose-us>
   </section>
 
-  <!-- Sección de Precios -->
   <section class="full-section" id="precios">
     <app-price-overview></app-price-overview>
   </section>
 
-  <!-- Sección del Formulario de Cotización -->
   <section id="cotizacion">
     <app-quote-form></app-quote-form>
   </section>
@@ -105,18 +148,22 @@
   <!-- Footer -->
   <footer class="modern-footer">
     <div class="footer-top">
-      <div class="footer-logo"> Deluxe Move Broker LLC</div>
+      <div class="footer-logo">
+        {{ 'LANGING_PAGE.MAIN_TITLE' | translate }}
+      </div>
       <ul class="footer-links">
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#cotizacion">Cotización</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#servicios">{{ 'LANGING_PAGE.FOOTER_SERVICES' | translate }}</a></li>
+        <li><a href="#cotizacion">{{ 'LANGING_PAGE.FOOTER_QUOTE' | translate }}</a></li>
+        <li><a (click)="openCall()">{{ 'LANGING_PAGE.FOOTER_CONTACT' | translate }}</a></li>
       </ul>
       <div class="footer-social">
-        <a (click)="openWhatsApp()" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a (click)="openWhatsApp()" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
       </div>
     </div>
     <div class="footer-bottom">
-      © {{ currentYear }} Deluxe Move Broker LLC. Todos los derechos reservados.
+      {{ 'LANGING_PAGE.COPYRIGHT' | translate:{ currentYear: currentYear } }}
     </div>
   </footer>
-</div>
+</main>

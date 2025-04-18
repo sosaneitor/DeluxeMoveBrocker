@@ -1,36 +1,34 @@
 <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
-  <h2 class="form-title">Solicita tu cotización</h2>
+  <h2 class="form-title">{{ 'QUOTE_FORM.TITLE' | translate }}</h2>
 
   <div class="form-group">
-    <label for="name">Nombre completo</label>
+    <label for="name">{{ 'QUOTE_FORM.NAME_LABEL' | translate }}</label>
     <input type="text" id="name" formControlName="name" required autocomplete="off" />
   </div>
 
   <div class="form-group">
-    <label for="email">Correo electrónico</label>
+    <label for="email">{{ 'QUOTE_FORM.EMAIL_LABEL' | translate }}</label>
     <input type="email" id="email" formControlName="email" required autocomplete="off" />
   </div>
 
   <div class="form-group">
-    <label for="phone">Teléfono</label>
+    <label for="phone">{{ 'QUOTE_FORM.PHONE_LABEL' | translate }}</label>
     <input type="tel" id="phone" formControlName="phone" required autocomplete="off" />
   </div>
 
-  <!-- Input para "from" con autocompletado -->
   <div class="form-group autocomplete">
-    <label for="from">Origen</label>
+    <label for="from">{{ 'QUOTE_FORM.FROM_LABEL' | translate }}</label>
     <div class="autocomplete-wrapper">
       <input type="text"
              id="from"
              formControlName="from"
-             placeholder="Escribe el lugar de origen"
+             [placeholder]="'QUOTE_FORM.FROM_PLACEHOLDER' | translate"
              required
              autocomplete="off"
              (focus)="showFromSuggestions = fromSuggestions.length > 0"
              (blur)="hideFromSuggestions()" />
       <button type="button" class="clear-btn" *ngIf="quoteForm.get('from')?.value" (click)="clearFromField()">×</button>
     </div>
-    <!-- Lista de sugerencias para "from" -->
     <ul *ngIf="fromSuggestions.length > 0 && showFromSuggestions" class="suggestions-list">
       <li *ngFor="let suggestion of fromSuggestions"
           (mousedown)="selectFromSuggestion(suggestion)">
@@ -39,21 +37,19 @@
     </ul>
   </div>
 
-  <!-- Input para "to" con autocompletado -->
   <div class="form-group autocomplete">
-    <label for="to">Destino</label>
+    <label for="to">{{ 'QUOTE_FORM.TO_LABEL' | translate }}</label>
     <div class="autocomplete-wrapper">
       <input type="text"
              id="to"
              formControlName="to"
-             placeholder="Escribe el lugar de destino"
+             [placeholder]="'QUOTE_FORM.TO_PLACEHOLDER' | translate"
              required
              autocomplete="off"
              (focus)="showToSuggestions = toSuggestions.length > 0"
              (blur)="hideToSuggestions()" />
       <button type="button" class="clear-btn" *ngIf="quoteForm.get('to')?.value" (click)="clearToField()">×</button>
     </div>
-    <!-- Lista de sugerencias para "to" -->
     <ul *ngIf="toSuggestions.length > 0 && showToSuggestions" class="suggestions-list">
       <li *ngFor="let suggestion of toSuggestions"
           (mousedown)="selectToSuggestion(suggestion)">
@@ -65,20 +61,20 @@
   <div class="form-group">
     <label for="is_enclosed">
       <input type="checkbox" id="is_enclosed" formControlName="is_enclosed" />
-      ¿Requiere transporte cerrado?
+      {{ 'QUOTE_FORM.ENCLOSED_LABEL' | translate }}
     </label>
   </div>
 
   <div class="form-group">
-    <label for="date">Fecha estimada</label>
+    <label for="date">{{ 'QUOTE_FORM.DATE_LABEL' | translate }}</label>
     <input type="date" id="date" formControlName="date" required autocomplete="off" />
   </div>
 
   <div class="form-group">
-    <label for="preferred_contact">¿Cómo prefieres recibir la cotización?</label>
+    <label for="preferred_contact">{{ 'QUOTE_FORM.PREFERRED_CONTACT_LABEL' | translate }}</label>
     <div class="custom-multi-select" (click)="toggleContactDropdown()">
       <div class="selected-options">
-        {{ getSelectedContacts() || 'Selecciona una o más opciones' }}
+        {{ getSelectedContacts() || ('QUOTE_FORM.PREFERRED_CONTACT_PLACEHOLDER' | translate) }}
       </div>
       <ul *ngIf="showContactDropdown" class="options-list">
         <li *ngFor="let option of contactOptions">
@@ -92,13 +88,12 @@
   </div>
 
   <div class="form-group">
-    <label for="description">Comentarios adicionales</label>
+    <label for="description">{{ 'QUOTE_FORM.DESCRIPTION_LABEL' | translate }}</label>
     <textarea id="description" formControlName="description" rows="3"></textarea>
   </div>
 
-  <button type="submit" class="submit-btn">Enviar cotización</button>
-  
-  <!-- Mensaje de respuesta -->
+  <button type="submit" class="submit-btn">{{ 'QUOTE_FORM.SUBMIT_BUTTON' | translate }}</button>
+
   <div *ngIf="message" class="form-response" [style.color]="messageColor">
     {{ message }}
   </div>

@@ -8,11 +8,12 @@ import { WhyChooseUsComponent } from './why-choose-us/why-choose-us.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PriceOverviewComponent } from './price-overview/price-overview.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, PriceOverviewComponent, QuoteFormComponent ],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, ServicesComponent, WhyChooseUsComponent, PriceOverviewComponent, QuoteFormComponent, TranslateModule ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
 })
@@ -23,19 +24,23 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   messageColor: string = '';
   menuOpen = false;
   carouselImages = [
-    'assets/carousel/background1.PNG',
-    'assets/carousel/background2.PNG',
-    'assets/carousel/background3.PNG',
-    'assets/carousel/background5.PNG',
+    'assets/carousel/carousel1.JPG',
+    'assets/carousel/carousel2.JPG',
+    'assets/carousel/carousel3.JPG',
+    'assets/carousel/carousel4.JPG',
   ]; 
   activeSlide = 0;
   private carouselInterval!: any;
 
   constructor(
     private fb: FormBuilder, 
-    private contactService: ContactService, 
+    private contactService: ContactService,
+    public translate: TranslateService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(browserLang?.match(/en|es/) ? browserLang : 'es');
+  }
 
   ngOnInit(): void {
     this.quoteForm = this.fb.group({
@@ -100,6 +105,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
+  }
+
+  changeLang(lang: 'en' | 'es') {
+    this.translate.use(lang);
   }
 
   closeMenu(): void {

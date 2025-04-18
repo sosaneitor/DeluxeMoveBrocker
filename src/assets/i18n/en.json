@@ -1,0 +1,91 @@
+
+{
+    "LANGING_PAGE": {
+      "LANG_ES": "Spanish",
+      "LANG_EN": "English",
+      "NAV_SERVICES": "Our Services",
+      "NAV_QUOTE": "Get a Quote",
+      "NAV_CONTACT": "Contact Us",
+      "TRANSPORT_SAFE": "Safe and Professional Vehicle Transportation",
+      "SUBTITLE": "Get your vehicle transported in minutes",
+      "BUTTON_CONTACT": "Contact Us",
+      "MAIN_TITLE": "Deluxe Move Broker LLC",
+      "MAIN_SUBTITLE": "Over 10 years of experience transporting vehicles with the highest quality standards in the U.S.",
+      "BUTTON_REQUEST_QUOTE": "Request a Quote",
+      "BUTTON_WHATSAPP": "WhatsApp",
+      "BUTTON_LEARN_MORE": "Learn More",
+      "FOOTER_SERVICES": "Services",
+      "FOOTER_QUOTE": "Quote",
+      "FOOTER_CONTACT": "Contact",
+      "COPYRIGHT": "© {{currentYear}} Deluxe Move Broker LLC. All rights reserved.",
+      "ALT_LOGO": "Deluxe Move Broker LLC Logo",
+      "ALT_HERO_IMAGE": "Truck specialized in vehicle transport"
+    },
+    "SERVICES": {
+      "TITLE": "SERVICES",
+      "ENCLOSED_TITLE": "Enclosed Trailers",
+      "ENCLOSED_DESC": "Transport classic, exotic, and race cars in enclosed trailers.",
+      "OPEN_TITLE": "Open Trailers",
+      "OPEN_DESC": "Transport all kinds of vehicles with the best open and secure equipment.",
+      "LOCAL_TITLE": "Local Transport & Storage",
+      "LOCAL_DESC": "Pickup and delivery guaranteed in Concord, North Carolina & secure and affordable storage.",
+      "BOOK_NOW": "Book Now"
+    },
+    "QUOTE_FORM": {
+      "TITLE": "Request Your Quote",
+      "NAME_LABEL": "Full Name",
+      "EMAIL_LABEL": "Email Address",
+      "PHONE_LABEL": "Phone Number",
+      "FROM_LABEL": "Origin",
+      "FROM_PLACEHOLDER": "Enter origin location",
+      "TO_LABEL": "Destination",
+      "TO_PLACEHOLDER": "Enter destination location",
+      "ENCLOSED_LABEL": "Need enclosed transport?",
+      "DATE_LABEL": "Estimated Date",
+      "PREFERRED_CONTACT_LABEL": "How would you like to receive the quote?",
+      "PREFERRED_CONTACT_PLACEHOLDER": "Select one or more options",
+      "DESCRIPTION_LABEL": "Additional Comments",
+      "SUBMIT_BUTTON": "Submit Quote"
+    },
+    "PRICE_OVERVIEW": {
+      "TITLE": "Price",
+      "INTRO": "The total cost of vehicle transport depends on the type of car you want to ship, where it needs to be picked up and delivered, the condition of the vehicle, whether it has modifications, the transport distance, the type of transport (open or enclosed), and finally, the time of year the shipment is made.",
+      "FACTORS": {
+        "SIZE_WEIGHT": {
+          "TITLE": "Vehicle size and weight",
+          "DESCRIPTION": "Larger or heavier vehicles require special accommodation and therefore the price may vary to cover those needs."
+        },
+        "CONDITION": {
+          "TITLE": "Vehicle condition",
+          "DESCRIPTION": "Shipping inoperable vehicles usually costs more because it requires additional equipment and more labor to safely accommodate the load."
+        },
+        "TRANSPORT_TYPE": {
+          "TITLE": "Type of transport",
+          "DESCRIPTION": "Open transport is the standard and most affordable option. Enclosed transport offers greater protection for the vehicle, although it is generally more expensive."
+        }
+      }
+    },
+    "WHY_CHOOSE_US": {
+      "TITLE": "Why customers choose us?",
+      "FEATURES": {
+        "CUSTOM_ADVICE": {
+          "TITLE": "Personalized Advice",
+          "DESCRIPTION": "At Deluxe Move Broker LLC, we guide you through the entire process to ensure your vehicle transport is smooth and hassle-free. Your peace of mind is our priority."
+        },
+        "NO_ADVANCE": {
+          "TITLE": "No Advance Payment",
+          "DESCRIPTION": "That's right! We don't charge anything upfront. You only pay when your vehicle has been safely delivered."
+        },
+        "INSURANCE": {
+          "TITLE": "Insurance Coverage",
+          "DESCRIPTION": "Every shipment includes insurance coverage based on your quote. Our carriers adhere to the highest standards of quality and safety."
+        },
+        "EXPERT_SUPPORT": {
+          "TITLE": "Expert Support",
+          "DESCRIPTION": "Our team of experts will help you choose the best option for your transport. We provide constant updates to keep you informed every step of the way."
+        }
+      }
+    }
+
+  }
+  

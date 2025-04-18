@@ -1,30 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss'
 })
 export class ServicesComponent {
+  constructor(public translate: TranslateService) {}
 
   services = [
     {
-      title: 'Enclosed Trailers',
-      description: 'Transporta vehículos clásicos, exóticos y de carrera en remolques cerrados.',
-      backgroundImage: 'assets/AutoTransportService3.PNG'
+      titleKey: 'SERVICES.ENCLOSED_TITLE',
+      descriptionKey: 'SERVICES.ENCLOSED_DESC',
+      backgroundImage: 'assets/AutoTransportService3.PNG',
     },
     {
-      title: 'Open Trailers',
-      description: 'Transporta todo tipo de vehículos con el mejor equipo abierto y seguro.',
-      backgroundImage: 'assets/AutoTransportService2.png'
+      titleKey: 'SERVICES.OPEN_TITLE',
+      descriptionKey: 'SERVICES.OPEN_DESC',
+      backgroundImage: 'assets/AutoTransportService2.png',
     },
     {
-      title: 'Transporte Local y Almacenamiento',
-      description: 'Recogida y entrega garantizadas en California del Norte & almacenamiento seguro y asequible.',
-      backgroundImage: 'assets/AutoTransportService4.PNG'
-    }
+      titleKey: 'SERVICES.LOCAL_TITLE',
+      descriptionKey: 'SERVICES.LOCAL_DESC',
+      backgroundImage: 'assets/AutoTransportService4.PNG',
+    },
   ];
+
+  openWhatsApp(): void {
+    window.open('https://wa.me/17862667459', '_blank');
+  }
 }

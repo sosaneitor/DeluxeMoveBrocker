@@ -1,36 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-why-choose-us',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './why-choose-us.component.html',
   styleUrl: './why-choose-us.component.scss'
 })
 export class WhyChooseUsComponent {
-  // Definición de los beneficios que se mostrarán
+  // Definición de los beneficios que se mostrarán con claves de traducción
   features = [
     {
-      icon: 'fa-headset', // Atención personalizada
-      title: 'Asesoría personalizada',
-      description: 'En Deluxe Move Broker LLC te acompañamos en todo el proceso para que el transporte de tu vehículo sea ágil y sin contratiempos. Tu tranquilidad es nuestra prioridad.'
+      icon: 'fa-headset',
+      title: 'WHY_CHOOSE_US.FEATURES.CUSTOM_ADVICE.TITLE',
+      description: 'WHY_CHOOSE_US.FEATURES.CUSTOM_ADVICE.DESCRIPTION'
     },
     {
-      icon: 'fa-dollar-sign', // Pago inicial $0
-      title: 'Sin pago anticipado',
-      description: '¡Así es! No cobramos nada por adelantado. Solo realizas el pago cuando tu vehículo ha sido entregado de forma segura.'
+      icon: 'fa-dollar-sign',
+      title: 'WHY_CHOOSE_US.FEATURES.NO_ADVANCE.TITLE',
+      description: 'WHY_CHOOSE_US.FEATURES.NO_ADVANCE.DESCRIPTION'
     },
     {
-      icon: 'fa-shield', // Cobertura de seguro
-      title: 'Protección asegurada',
-      description: 'Cada envío incluye cobertura de seguro según tu cotización. Nuestros transportistas cumplen con los más altos estándares de calidad y seguridad.'
+      icon: 'fa-shield',
+      title: 'WHY_CHOOSE_US.FEATURES.INSURANCE.TITLE',
+      description: 'WHY_CHOOSE_US.FEATURES.INSURANCE.DESCRIPTION'
     },
     {
-      icon: 'fa-user-check', // Asesores dedicados
-      title: 'Atención experta',
-      description: 'Nuestro equipo de expertos te ayudará a elegir la mejor opción para tu traslado. Hacemos seguimiento constante para mantenerte informado en todo momento.'
+      icon: 'fa-user-check',
+      title: 'WHY_CHOOSE_US.FEATURES.EXPERT_SUPPORT.TITLE',
+      description: 'WHY_CHOOSE_US.FEATURES.EXPERT_SUPPORT.DESCRIPTION'
     }
   ];
-  
 }

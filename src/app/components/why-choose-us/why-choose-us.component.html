@@ -1,19 +1,18 @@
 <section class="why-choose-us modern-container">
-    <!-- Encabezado de la sección -->
-    <div class="hero-header">
-      <h2 class="title">¿Por qué los clientes nos eligen?</h2>
-    </div>
-  
-    <!-- Grid de beneficios -->
-    <div class="features-grid">
-      <div class="feature-card" *ngFor="let feature of features">
-        <!-- Ícono usando FontAwesome -->
-        <div class="icon">
-          <i class="fa-solid {{ feature.icon }}"></i>
-        </div>
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.description }}</p>
+  <!-- Encabezado de la sección -->
+  <div class="hero-header">
+    <h2 class="title">{{ 'WHY_CHOOSE_US.TITLE' | translate }}</h2>
+  </div>
+
+  <!-- Grid de beneficios -->
+  <div class="features-grid">
+    <div class="feature-card" *ngFor="let feature of features">
+      <!-- Ícono usando FontAwesome -->
+      <div class="icon">
+        <i class="fa-solid {{ feature.icon }}"></i>
       </div>
+      <h3>{{ feature.title | translate }}</h3>
+      <p>{{ feature.description | translate }}</p>
     </div>
+  </div>
 </section>
-  
