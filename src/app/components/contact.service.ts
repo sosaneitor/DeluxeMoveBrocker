@@ -1,20 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  // Actualiza el endpoint con el correo destino
-  private endpoint = 'https://formsubmit.co/f6336212e86b52b8178c98c4acf7db72';
+  private endpoint = 'https://formsubmit.co/deluxemovebroker@gmail.com';
 
   constructor(private http: HttpClient) {}
 
   sendQuote(data: any): Observable<any> {
-    return this.http.post(this.endpoint, data, {
-        headers: { 'Accept': 'application/json' },
-        responseType: 'text'
+    // Convertimos el objeto plano en un string tipo x-www-form-urlencoded
+    const body = new HttpParams({ fromObject: this.flattenData(data) });
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
     });
+
+    return this.http.post(this.endpoint, body.toString(), {
+      headers,
+      responseType: 'text'  // Formsubmit no devuelve JSON, mejor usar 'text'
+    });
+  }
+
+  private flattenData(data: any): { [key: string]: string } {
+    const flat: { [key: string]: string } = {};
+
+    for (const key in data) {
+      if (Array.isArray(data[key])) {
+        // Para arrays como `preferred_contact`, puedes concatenar con comas
+        flat[key] = data[key].join(', ');
+      } else {
+        flat[key] = String(data[key]);
+      }
+    }
+
+    return flat;
   }
 }
