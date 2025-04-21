@@ -31,6 +31,6 @@ export class ServicesComponent {
   ];
 
   openWhatsApp(): void {
-    window.open('https://wa.me/17862667459', '_blank');
+    window.open('https://wa.me/17046994001', '_blank');
   }
 }

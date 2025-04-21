@@ -1,100 +1,265 @@
+<!-- quote-form.component.html -->
 <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()" class="quote-form">
   <h2 class="form-title">{{ 'QUOTE_FORM.TITLE' | translate }}</h2>
 
-  <div class="form-group">
-    <label for="name">{{ 'QUOTE_FORM.NAME_LABEL' | translate }}</label>
-    <input type="text" id="name" formControlName="name" required autocomplete="off" />
-  </div>
+  <!-- Stepper -->
+  <ul class="stepper">
+    <li [class.active]="currentStep === 1">{{ 'QUOTE_FORM.DESTINATION' | translate }}</li>
+    <li [class.active]="currentStep === 2">{{ 'QUOTE_FORM.VEHICLE' | translate }}</li>
+    <li [class.active]="currentStep === 3">{{ 'QUOTE_FORM.CONTACT_DETAILS' | translate }}</li>
+  </ul>
 
-  <div class="form-group">
-    <label for="email">{{ 'QUOTE_FORM.EMAIL_LABEL' | translate }}</label>
-    <input type="email" id="email" formControlName="email" required autocomplete="off" />
-  </div>
-
-  <div class="form-group">
-    <label for="phone">{{ 'QUOTE_FORM.PHONE_LABEL' | translate }}</label>
-    <input type="tel" id="phone" formControlName="phone" required autocomplete="off" />
-  </div>
-
-  <div class="form-group autocomplete">
-    <label for="from">{{ 'QUOTE_FORM.FROM_LABEL' | translate }}</label>
-    <div class="autocomplete-wrapper">
-      <input type="text"
-             id="from"
-             formControlName="from"
-             [placeholder]="'QUOTE_FORM.FROM_PLACEHOLDER' | translate"
-             required
-             autocomplete="off"
-             (focus)="showFromSuggestions = fromSuggestions.length > 0"
-             (blur)="hideFromSuggestions()" />
-      <button type="button" class="clear-btn" *ngIf="quoteForm.get('from')?.value" (click)="clearFromField()">×</button>
-    </div>
-    <ul *ngIf="fromSuggestions.length > 0 && showFromSuggestions" class="suggestions-list">
-      <li *ngFor="let suggestion of fromSuggestions"
-          (mousedown)="selectFromSuggestion(suggestion)">
-        {{ suggestion.display_name }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="form-group autocomplete">
-    <label for="to">{{ 'QUOTE_FORM.TO_LABEL' | translate }}</label>
-    <div class="autocomplete-wrapper">
-      <input type="text"
-             id="to"
-             formControlName="to"
-             [placeholder]="'QUOTE_FORM.TO_PLACEHOLDER' | translate"
-             required
-             autocomplete="off"
-             (focus)="showToSuggestions = toSuggestions.length > 0"
-             (blur)="hideToSuggestions()" />
-      <button type="button" class="clear-btn" *ngIf="quoteForm.get('to')?.value" (click)="clearToField()">×</button>
-    </div>
-    <ul *ngIf="toSuggestions.length > 0 && showToSuggestions" class="suggestions-list">
-      <li *ngFor="let suggestion of toSuggestions"
-          (mousedown)="selectToSuggestion(suggestion)">
-        {{ suggestion.display_name }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="form-group">
-    <label for="is_enclosed">
-      <input type="checkbox" id="is_enclosed" formControlName="is_enclosed" />
-      {{ 'QUOTE_FORM.ENCLOSED_LABEL' | translate }}
-    </label>
-  </div>
-
-  <div class="form-group">
-    <label for="date">{{ 'QUOTE_FORM.DATE_LABEL' | translate }}</label>
-    <input type="date" id="date" formControlName="date" required autocomplete="off" />
-  </div>
-
-  <div class="form-group">
-    <label for="preferred_contact">{{ 'QUOTE_FORM.PREFERRED_CONTACT_LABEL' | translate }}</label>
-    <div class="custom-multi-select" (click)="toggleContactDropdown()">
-      <div class="selected-options">
-        {{ getSelectedContacts() || ('QUOTE_FORM.PREFERRED_CONTACT_PLACEHOLDER' | translate) }}
+  <div class="step-content">
+    <!-- Paso 1: Destino -->
+    <div *ngIf="currentStep === 1">
+      <div class="form-group autocomplete">
+        <label for="from">{{ 'QUOTE_FORM.FROM_LABEL' | translate }}</label>
+        <div class="autocomplete-wrapper">
+          <input
+            type="text"
+            id="from"
+            formControlName="from"
+            [placeholder]="'QUOTE_FORM.FROM_PLACEHOLDER' | translate"
+            required
+            autocomplete="off"
+            (focus)="showFromSuggestions = fromSuggestions.length > 0"
+            (blur)="hideFromSuggestions()" />
+          <button
+            type="button"
+            class="clear-btn"
+            *ngIf="quoteForm.get('from')?.value"
+            (click)="clearFromField()">×</button>
+        </div>
+        <ul *ngIf="fromSuggestions.length > 0 && showFromSuggestions" class="suggestions-list">
+          <li *ngFor="let suggestion of fromSuggestions" (mousedown)="selectFromSuggestion(suggestion)">
+            {{ suggestion.display_name }}
+          </li>
+        </ul>
       </div>
-      <ul *ngIf="showContactDropdown" class="options-list">
-        <li *ngFor="let option of contactOptions">
+
+      <div class="form-group autocomplete">
+        <label for="to">{{ 'QUOTE_FORM.TO_LABEL' | translate }}</label>
+        <div class="autocomplete-wrapper">
+          <input
+            type="text"
+            id="to"
+            formControlName="to"
+            [placeholder]="'QUOTE_FORM.TO_PLACEHOLDER' | translate"
+            required
+            autocomplete="off"
+            (focus)="showToSuggestions = toSuggestions.length > 0"
+            (blur)="hideToSuggestions()" />
+          <button
+            type="button"
+            class="clear-btn"
+            *ngIf="quoteForm.get('to')?.value"
+            (click)="clearToField()">×</button>
+        </div>
+        <ul *ngIf="toSuggestions.length > 0 && showToSuggestions" class="suggestions-list">
+          <li *ngFor="let suggestion of toSuggestions" (mousedown)="selectToSuggestion(suggestion)">
+            {{ suggestion.display_name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Paso 2: Vehículo -->
+    <div *ngIf="currentStep === 2">
+      <!-- Vehicle Year -->
+      <div class="form-group">
+        <label for="vehicleYear">{{ 'QUOTE_FORM.VEHICLE_YEAR' | translate }}</label>
+        <select id="vehicleYear" formControlName="vehicleYear" required>
+          <option value="" disabled selected>{{ 'QUOTE_FORM.SELECT_YEAR' | translate }}</option>
+          <option *ngFor="let y of yearOptions" [value]="y">{{ y }}</option>
+        </select>
+      </div>
+
+      <!-- Vehicle Make -->
+      <div class="form-group">
+        <label for="vehicleMake">{{ 'QUOTE_FORM.VEHICLE_MAKE' | translate }}</label>
+        <select id="vehicleMake" formControlName="vehicleMake" required>
+          <option value="" disabled selected>{{ 'QUOTE_FORM.SELECT_MAKE' | translate }}</option>
+          <option *ngFor="let m of makeOptions" [value]="m">{{ m }}</option>
+          <option value="other">{{ 'QUOTE_FORM.OTHER' | translate }}</option>
+        </select>
+      </div>
+      <!-- Si selecciona "Otro" en Make, muestra input -->
+      <div
+        class="form-group"
+        *ngIf="quoteForm.get('vehicleMake')!.value === 'other'">
+        <label for="vehicleMakeOther">{{ 'QUOTE_FORM.OTHER_MAKE_LABEL' | translate }}</label>
+        <input
+          id="vehicleMakeOther"
+          type="text"
+          formControlName="vehicleMakeOther"
+          [placeholder]="'QUOTE_FORM.OTHER_MAKE_PLACEHOLDER' | translate" />
+      </div>
+
+      <!-- Vehicle Model -->
+      <div class="form-group">
+        <label for="vehicleModel">{{ 'QUOTE_FORM.VEHICLE_MODEL' | translate }}</label>
+        <select
+          id="vehicleModel"
+          formControlName="vehicleModel"
+          required
+          [disabled]="!modelOptions.length">
+          <option value="" disabled selected>{{ 'QUOTE_FORM.SELECT_MODEL' | translate }}</option>
+          <option *ngFor="let mo of modelOptions" [value]="mo">{{ mo }}</option>
+          <option value="other">{{ 'QUOTE_FORM.OTHER' | translate }}</option>
+        </select>
+      </div>
+      <!-- Si selecciona "Otro" en Model, muestra input -->
+      <div
+        class="form-group"
+        *ngIf="quoteForm.get('vehicleModel')!.value === 'other'">
+        <label for="vehicleModelOther">{{ 'QUOTE_FORM.OTHER_MODEL_LABEL' | translate }}</label>
+        <input
+          id="vehicleModelOther"
+          type="text"
+          formControlName="vehicleModelOther"
+          [placeholder]="'QUOTE_FORM.OTHER_MODEL_PLACEHOLDER' | translate" />
+      </div>
+
+      <!-- Enclosed -->
+      <div class="form-group radio-group">
+        <span class="radio-question">{{ 'QUOTE_FORM.ENCLOSED_LABEL' | translate }}</span>
+        <div class="radio-options">
           <label>
-            <input type="checkbox" [value]="option.value" (change)="toggleContactOption(option.value)" [checked]="isContactSelected(option.value)" />
-            {{ option.label }}
+            <input type="radio" formControlName="is_enclosed" [value]="true" />
+            {{ 'QUOTE_FORM.YES' | translate }}
           </label>
-        </li>
-      </ul>
+          <label>
+            <input type="radio" formControlName="is_enclosed" [value]="false" />
+            {{ 'QUOTE_FORM.NO' | translate }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Operable -->
+      <div class="form-group radio-group">
+        <span class="radio-question">{{ 'QUOTE_FORM.IS_OPERABLE' | translate }}</span>
+        <div class="radio-options">
+          <label>
+            <input type="radio" formControlName="is_operable" [value]="true" />
+            {{ 'QUOTE_FORM.YES' | translate }}
+          </label>
+          <label>
+            <input type="radio" formControlName="is_operable" [value]="false" />
+            {{ 'QUOTE_FORM.NO' | translate }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Descripción adicional -->
+      <div class="form-group">
+        <label for="description">{{ 'QUOTE_FORM.DESCRIPTION_LABEL' | translate }}</label>
+        <textarea id="description" formControlName="description" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Paso 3: Fecha y Contacto -->
+    <div *ngIf="currentStep === 3">
+      <div class="form-group">
+        <label for="date">{{ 'QUOTE_FORM.DATE_LABEL' | translate }}</label>
+        <input
+          type="date"
+          id="date"
+          formControlName="date"
+          required
+          autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="name">{{ 'QUOTE_FORM.NAME_LABEL' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          required
+          autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">{{ 'QUOTE_FORM.EMAIL_LABEL' | translate }}</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          required
+          autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">{{ 'QUOTE_FORM.PHONE_LABEL' | translate }}</label>
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phone"
+          required
+          autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="preferred_contact">{{ 'QUOTE_FORM.PREFERRED_CONTACT_LABEL' | translate }}</label>
+        <div class="custom-multi-select" (click)="toggleContactDropdown()">
+          <!-- 1) Selected display -->
+        <div class="selected-options">
+          <ng-container *ngIf="getSelectedValues().length > 0; else placeholder">
+            <ng-container *ngFor="let val of getSelectedValues(); let last = last">
+              {{ getTranslationKey(val) | translate }}
+              <span *ngIf="!last">, </span>
+            </ng-container>
+          </ng-container>
+          <ng-template #placeholder>
+            {{ 'QUOTE_FORM.PREFERRED_CONTACT_PLACEHOLDER' | translate }}
+          </ng-template>
+        </div>
+
+        <!-- 2) Dropdown options -->
+        <ul *ngIf="showContactDropdown" class="options-list">
+          <li *ngFor="let option of contactOptions">
+            <label>
+              <input
+                type="checkbox"
+                [value]="option.value"
+                (change)="toggleContactOption(option.value)"
+                [checked]="isContactSelected(option.value)" />
+              {{ option.translationKey | translate }}
+            </label>
+          </li>
+        </ul>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="description">{{ 'QUOTE_FORM.DESCRIPTION_LABEL' | translate }}</label>
-    <textarea id="description" formControlName="description" rows="3"></textarea>
+  <!-- Botones de navegación -->
+  <div class="buttons">
+    <button
+      type="button"
+      class="prev-btn"
+      (click)="prevStep()"
+      *ngIf="currentStep > 1">
+      {{ 'QUOTE_FORM.PREVIOUS' | translate }}
+    </button>
+    <button
+      type="button"
+      class="next-btn"
+      (click)="nextStep()"
+      *ngIf="currentStep < 3"
+      [disabled]="!isStepValid()">
+      {{ 'QUOTE_FORM.NEXT' | translate }}
+    </button>
+    <button
+      type="submit"
+      class="submit-btn"
+      *ngIf="currentStep === 3"
+      [disabled]="quoteForm.invalid">
+      {{ 'QUOTE_FORM.SUBMIT_BUTTON' | translate }}
+    </button>
   </div>
-
-  <button type="submit" class="submit-btn">{{ 'QUOTE_FORM.SUBMIT_BUTTON' | translate }}</button>
 
   <div *ngIf="message" class="form-response" [style.color]="messageColor">
-    {{ message }}
+    {{ message | translate }}
   </div>
 </form>

@@ -6,135 +6,268 @@ $border-radius: 1rem;
 $spacing: 1rem;
 $font-family: 'Inter', sans-serif;
 $transition-speed: 0.3s;
+
 // Formulario de Cotización
 .quote-form {
-    background: $card-bg;
-    backdrop-filter: blur(10px);
-    border-radius: $border-radius;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    animation: fadeInRight 1.2s ease-out;
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  background: $card-bg;
+  backdrop-filter: blur(10px);
+  border-radius: $border-radius;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInRight 1.2s ease-out;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 
-  
-    @media (min-width: 768px) {
-      width: 50%;
-      max-width: none;
-    }
-  
-    .form-title {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
+  .form-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  // Step indicator (wizard)
+  .stepper {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin-bottom: $spacing * 1.5;
+
+    li {
+      flex: 1;
       text-align: center;
-    }
-  
-    .form-group {
-      margin-bottom: 1rem;
-  
-      label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
+      position: relative;
+      font-size: 1rem;
+      color: rgba($text-light, 0.7);
+      cursor: pointer;
+      transition: color $transition-speed ease;
 
-        input[type="checkbox"] {
-          margin-right: 0.5rem;
-          width: 1.25rem;
-          height: 1.25rem;
-          border: none;
-          border-radius: 0.25rem;
-          background: rgba(255, 255, 255, 0.1);
-          transition: background $transition-speed ease;
+      &.active {
+        color: $primary-color;
+        font-weight: bold;
 
-          &:checked {
-            background-color: $primary-color;
-          }
-
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px lighten($primary-color, 30%);
-          }
+        &::after {
+          background: $primary-color;
         }
       }
-  
-      input,
-      textarea {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: none;
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: $text-light;
-        font-size: 1rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: transparent;
         transition: background $transition-speed ease;
-  
-        &:focus {
-          outline: none;
-          background: rgba(255, 255, 255, 0.2);
-        }
-      }
-
-      input[type="date"] {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: none;
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: $text-light;
-        font-size: 1rem;
-        transition: background $transition-speed ease;
-
-        &:focus {
-          outline: none;
-          background: rgba(255, 255, 255, 0.2);
-        }
-      }
-
-      select {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: none;
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: $text-light;
-        font-size: 1rem;
-        transition: background $transition-speed ease;
-
-        &:focus {
-          outline: none;
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        option {
-          background: $background-dark;
-          color: $text-light;
-        }
-      }
-    }
-  
-    .submit-btn {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background-color: $primary-color;
-      border: none;
-      border-radius: 0.5rem;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: background-color $transition-speed ease, transform $transition-speed ease;
-  
-      &:hover {
-        background-color: darken($primary-color, 10%);
-        transform: translateY(-2px);
       }
     }
   }
 
+  // Form groups and controls
+  .form-group {
+    margin-bottom: 1rem;
+
+    &.autocomplete {
+      position: relative;
+    }
+
+    input[type="checkbox"] {
+      display: inline-flex;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 0.25rem;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: background $transition-speed ease, border-color $transition-speed ease;
+
+      &:checked {
+        background-color: $primary-color;
+        border-color: $primary-color;
+
+        &::after {
+          content: '✔';
+          font-size: 0.8rem;
+          color: white;
+        }
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px lighten($primary-color, 20%);
+      }
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea,
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: $text-light;
+      font-size: 1rem;
+      transition: background $transition-speed ease;
+
+      &:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    select option {
+      background: $background-dark;
+      color: $text-light;
+    }
+  }
+
+  .form-group.radio-group {
+    display: flex;
+    flex-direction: column;      // columna en vez de fila
+    align-items: flex-start;     // alineados a la izquierda
+    margin-bottom: 1rem;
+
+    .radio-question {
+      margin-bottom: 0.5rem;     // separa pregunta de opciones
+      font-weight: 500;
+      color: $text-light;
+    }
+
+    .radio-options {
+      display: flex;
+      gap: 1.5rem;                // espacio entre Sí y No
+
+      label {
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        cursor: pointer;
+
+        input {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  // Navigation buttons
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacing * 1.5;
+
+    button {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color $transition-speed ease, transform $transition-speed ease;
+
+      &.prev-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: $text-light;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      &.next-btn {
+        background-color: $primary-color;
+        color: white;
+
+        &:disabled {
+          background-color: rgba($primary-color, 0.6);
+          cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+
+      &.submit-btn {
+        flex: 1;
+        background-color: $primary-color;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-align: center;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+          transform: translateY(-2px);
+        }
+
+        &:disabled {
+          background-color: rgba($primary-color, 0.6);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// Autocomplete suggestions styling (scoped to form-group.autocomplete)
+.quote-form {
+  .form-group.autocomplete {
+    .suggestions-list {
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: 0;
+      width: 100%;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      li {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: $background-dark;
+        transition: background $transition-speed ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        &:last-child {
+          border-bottom: none;
+        }
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+}
+
+// Autocomplete input wrapper and clear button
 .autocomplete-wrapper {
   position: relative;
+  overflow: visible !important;
 
   input {
     padding-right: 2.5rem;
@@ -145,90 +278,97 @@ $transition-speed: 0.3s;
     top: 50%;
     right: 0.75rem;
     transform: translateY(-50%);
-    background: none;
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     color: $text-light;
-    font-size: 1.25rem;
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: color $transition-speed ease;
+    transition: background $transition-speed ease, color $transition-speed ease;
 
     &:hover {
-      color: lighten($text-light, 20%);
+      background: rgba(255, 255, 255, 0.3);
+      color: $primary-color;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.5);
     }
   }
 }
 
+// Ensure autocomplete container allows visible overflow
+.quote-form .form-group.autocomplete {
+  overflow: visible !important;
+}
+
+// Improve touch behavior for mobile
 .suggestions-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: $card-bg;
-  border: 1px solid lighten($card-bg, 10%);
-  border-radius: 0.5rem;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-
-  li {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background $transition-speed ease;
-
-    &:hover {
-      background: lighten($card-bg, 10%);
-    }
-  }
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
 }
 
+// Custom multi-select (preferred_contact)
 .custom-multi-select {
   position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: $text-light;
   padding: 0.75rem 1rem;
   cursor: pointer;
+  transition: background $transition-speed ease, border-color $transition-speed ease;
+
+  &:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: $primary-color;
+  }
 
   .selected-options {
-    font-size: 1rem;
     color: $text-light;
+    font-size: 1rem;
   }
 
   .options-list {
     position: absolute;
-    top: calc(100% + 0.5rem); // Add spacing between the dropdown and the trigger
+    top: calc(100% + 0.5rem);
     left: 0;
-    right: 0;
-    background: $background-dark;
-    border: 1px solid lighten($card-bg, 10%);
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 0.5rem;
-    max-height: 200px;
+    max-height: 180px;
     overflow-y: auto;
-    z-index: 1000; // Ensure the dropdown appears above other elements
-    margin-top: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); // Add a stronger shadow for better separation
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.25rem 0;
 
     li {
       padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       cursor: pointer;
+      color: $background-dark;
       transition: background $transition-speed ease;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
 
-      label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-      }
-
-      input[type="checkbox"] {
-        width: 1rem;
-        height: 1rem;
-        accent-color: $primary-color;
+      &:last-child {
+        border-bottom: none;
       }
 
       &:hover {
-        background: lighten($card-bg, 10%);
+        background: rgba(0,0,0,0.05);
+      }
+
+      input[type="checkbox"] {
+        accent-color: $primary-color;
       }
     }
   }

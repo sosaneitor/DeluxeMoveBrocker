@@ -88,11 +88,11 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   // Abre WhatsApp con el número configurado (reemplaza el número según necesites)
   openWhatsApp(): void {
-    window.open('https://wa.me/17862667459', '_blank');
+    window.open('https://wa.me/17046994001', '_blank');
   }
 
   openCall(): void {
-    window.open('tel:+17862667459', '_self');
+    window.open('tel:+17046994001', '_self');
   }
 
   // Desplaza la vista a la sección indicada por su ID
