@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-  private endpoint = 'https://formsubmit.co/deluxemovebroker@gmail.com';
+  private endpoint = 'https://formsubmit.co/84234105fec0273bdd5ea27a23a1a9f4';
 
   constructor(private http: HttpClient) {}
 
