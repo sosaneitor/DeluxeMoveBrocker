@@ -6,20 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-  private endpoint = 'https://formsubmit.co/deluxemovebroker@gmail.com';
+  private endpoint = 'https://formspree.io/f/xjkwvwoa';
 
   constructor(private http: HttpClient) {}
 
   sendQuote(data: any): Observable<any> {
     // Convertimos el objeto plano en un string tipo x-www-form-urlencoded
-    const body = new HttpParams({ fromObject: this.flattenData(data) });
+    //const body = new HttpParams({ fromObject: this.flattenData(data) });
 
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'
     });
 
-    return this.http.post(this.endpoint, body.toString(), {
+    return this.http.post(this.endpoint, data, {
       headers,
       responseType: 'text'  // Formsubmit no devuelve JSON, mejor usar 'text'
     });
