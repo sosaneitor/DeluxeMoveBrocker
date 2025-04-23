@@ -856,7 +856,7 @@ export class QuoteFormComponent implements OnInit {
 
   ngOnInit(): void {
     // Llenamos años (últimos 30)
-    this.yearOptions = Array.from({ length: 50 }, (_, i) => this.currentYear - i);
+    this.yearOptions = Array.from({ length: 50 }, (_, i) => (this.currentYear + 2) - i);
 
     // Creamos el form con los nuevos controles
     this.quoteForm = this.fb.group({
